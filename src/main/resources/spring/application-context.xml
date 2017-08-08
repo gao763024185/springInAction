@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--启用Aspectj自动代理-->
+    <aop:aspectj-autoproxy/>
+    <bean class="com.aop.EncoreableIntroducer"/>
+    <bean id="audience" class="com.aop.Audience"/>
+    <bean id="trackCounter" class="com.aop.TrackCounter"/>
+    <bean id="encoreableDelegate" class="com.aop.DefaultEncoreable"/>
+    <bean id="spittleRepository" class="com.spittr.data.SpittleRepository" />
+    <bean id="criticismEngine" class="com.aop.CriticismEngineImpl">
+        <property name="criticismPool">
+            <list>
+                <value>Worst performace ever!</value>
+                <value>I laughed,I cired,then I realized I was at the wrong show.</value>
+                <value>A must see show!</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="cd" class="com.test.baseJava.BlankDisc">
+        <property name="title" value="gt.Pepper's Lonely Hearts Club Band"/>
+        <property name="artist" value="The Beatles"/>
+        <property name="tracks">
+            <list>
+                <value>111</value>
+                <value>112</value>
+                <value>113</value>
+                <value>114</value>
+                <value>115</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--&lt;!&ndash;在Xml中声明切面&ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="audience">-->
+            <!--<aop:pointcut id="performance" expression="execution(* com.aop.Performance.perform(..))"/>-->
+            <!--<aop:before-->
+                    <!--pointcut-ref="performance"-->
+                    <!--method="silenceCellPhones"/>-->
+            <!--<aop:before-->
+                    <!--pointcut-ref="performance"-->
+                    <!--method="takeSeats"/>-->
+            <!--<aop:after-returning-->
+                    <!--pointcut-ref="performance"-->
+                    <!--method="applause"/>-->
+            <!--<aop:after-throwing-->
+                    <!--pointcut-ref="performance"-->
+                    <!--method="demandRefund"/>-->
+            <!--<aop:around-->
+                    <!--pointcut-ref="performance"-->
+                    <!--method="watchPerformance"/>-->
+        <!--</aop:aspect>-->
+        <!--<aop:aspect ref="trackCounter">-->
+            <!--<aop:pointcut id="trackPlayed" expression="execution(* com.test.baseJava.CompactDisc.playTrack(String))-->
+                                                        <!--and args(trackNumber)"/>-->
+            <!--<aop:before-->
+                    <!--pointcut-ref="trackPlayed"-->
+                    <!--method="countTrack"/>-->
+        <!--</aop:aspect>-->
+
+        <!--&lt;!&ndash;通过切面引入新的功能&ndash;&gt;-->
+        <!--<aop:aspect>-->
+            <!--<aop:declare-parents types-matching="com.aop.Performance+" implement-interface="com.aop.Encoreable"-->
+                                 <!--delegate-ref="encoreableDelegate"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+
+</beans>
