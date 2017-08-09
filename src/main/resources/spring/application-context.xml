@@ -14,7 +14,6 @@
     <bean id="audience" class="com.aop.Audience"/>
     <bean id="trackCounter" class="com.aop.TrackCounter"/>
     <bean id="encoreableDelegate" class="com.aop.DefaultEncoreable"/>
-    <bean id="spittleRepository" class="com.spittr.data.SpittleRepository" />
     <bean id="criticismEngine" class="com.aop.CriticismEngineImpl">
         <property name="criticismPool">
             <list>

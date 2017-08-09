@@ -1,6 +1,7 @@
 package com.spittr.data;
 
 import com.spittr.Spittle;
+import sun.security.provider.ConfigFile;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface SpittleRepository {
     List<Spittle> findSpittles(long max, int count);
+    Spittle findOne(long spittleId);
 }
